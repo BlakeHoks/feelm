@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "./tokens.css";
+
+/**
+ * Feelm — Tailwind v4 theme mapping.
+ * Semantic tokens из tokens.css пробрасываются в Tailwind utility-классы.
+ * Используй: bg-base, text-fg, border-border и т.д.
+ */
+@theme {
+  --color-bg-deep: var(--bg-deep);
+  --color-bg-base: var(--bg-base);
+  --color-bg-elevated: var(--bg-elevated);
+  --color-surface: var(--surface);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-text: var(--primary-text);
+
+  --color-secondary: var(--secondary);
+  --color-accent-warm: var(--accent-warm);
+  --color-success: var(--success);
+  --color-destructive: var(--destructive);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-expo: cubic-bezier(0.7, 0, 0.84, 0);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--bg-base);
+    color: var(--fg);
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 100svh;
+  }
+
+  /* мета-данные (Space Mono) — не breaking space'ятся по цифрам */
+  .font-mono {
+    font-feature-settings:
+      "tnum" 1,
+      "zero" 1;
+  }
+
+  /* focus-visible consistency — всегда видимый ring для клавиатуры */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background-color: var(--primary);
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  /* ambient glow под primary CTA */
+  .shadow-primary-glow {
+    box-shadow:
+      0 0 0 1px color-mix(in srgb, var(--primary) 40%, transparent),
+      0 8px 24px -8px var(--primary-glow);
+  }
+
+  /* reduced motion — канонический паттерн WCAG: !important обязателен для override любых transitions */
+  /* biome-ignore-start lint/complexity/noImportantStyles: accessibility override, см. https://web.dev/prefers-reduced-motion/ */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  /* biome-ignore-end lint/complexity/noImportantStyles: accessibility override */
+}
