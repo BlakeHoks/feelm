@@ -18,28 +18,28 @@
 
     <script>
       // FOUC-safe theme init. Runs before React mounts.
-            // Читает формат zustand persist: { state: { mode: 'dark'|'light'|'system' } }.
-            // Default: dark.
-            ;(() => {
-              let mode = 'dark'
-              try {
-                const raw = localStorage.getItem('feelm-theme')
-                if (raw) {
-                  const parsed = JSON.parse(raw)
-                  const stored = parsed?.state?.mode
-                  if (stored === 'light' || stored === 'dark' || stored === 'system') mode = stored
-                }
-                const resolved =
-                  mode === 'system'
-                    ? window.matchMedia('(prefers-color-scheme: light)').matches
-                      ? 'light'
-                      : 'dark'
-                    : mode
-                document.documentElement.setAttribute('data-theme', resolved)
-              } catch {
-                document.documentElement.setAttribute('data-theme', 'dark')
-              }
-            })()
+                                          // Читает формат zustand persist: { state: { mode: 'dark'|'light'|'system' } }.
+                                          // Default: dark.
+                                          ;(() => {
+                                            let mode = 'dark'
+                                            try {
+                                              const raw = localStorage.getItem('feelm-theme')
+                                              if (raw) {
+                                                const parsed = JSON.parse(raw)
+                                                const stored = parsed?.state?.mode
+                                                if (stored === 'light' || stored === 'dark' || stored === 'system') mode = stored
+                                              }
+                                              const resolved =
+                                                mode === 'system'
+                                                  ? window.matchMedia('(prefers-color-scheme: light)').matches
+                                                    ? 'light'
+                                                    : 'dark'
+                                                  : mode
+                                              document.documentElement.setAttribute('data-theme', resolved)
+                                            } catch {
+                                              document.documentElement.setAttribute('data-theme', 'dark')
+                                            }
+                                          })()
     </script>
   </head>
   <body>

@@ -75,12 +75,62 @@
   }
 }
 
+@keyframes feelm-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes feelm-panel-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes feelm-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @layer utilities {
   /* ambient glow под primary CTA */
   .shadow-primary-glow {
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--primary) 40%, transparent),
       0 8px 24px -8px var(--primary-glow);
+  }
+
+  .animate-feelm-fade-in {
+    animation: feelm-fade-in 200ms ease-out both;
+  }
+  .animate-feelm-panel-in {
+    animation: feelm-panel-in 220ms var(--ease-out-expo) both;
+  }
+  .animate-feelm-pop {
+    animation: feelm-pop 180ms var(--ease-out-expo);
+  }
+
+  /* горизонтальный strip — скрываем scrollbar */
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
   }
 
   /* reduced motion — канонический паттерн WCAG: !important обязателен для override любых transitions */

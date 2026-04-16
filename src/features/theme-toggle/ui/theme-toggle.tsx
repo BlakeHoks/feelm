@@ -1,5 +1,5 @@
 import { Monitor, Moon, Sun } from '@phosphor-icons/react'
-import { type ThemeMode, useThemeStore } from '@/shared/lib/theme'
+import { type ThemeMode, useThemeStore } from '@/shared/lib/theme/store'
 
 const options: Array<{ value: ThemeMode; label: string; Icon: typeof Sun }> = [
   { value: 'light', label: 'Light mode', Icon: Sun },
